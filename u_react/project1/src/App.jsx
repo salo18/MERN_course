@@ -1,7 +1,7 @@
 // import reactLogo from './assets/react.svg'
 import {useState} from 'react'
-import ExpenseItem from "./components/ExpenseItem";
 import Expenses from './components/Expenses'
+import NewExpense from './components/NewExpense'
 
 function App() {
   const [expenses, setExpenses] = useState([
@@ -26,10 +26,18 @@ function App() {
     },
   ]);
 
+  function addExpenseHandler(expense) {
+    setExpenses(prevState => {
+      return [
+        ...prevState,
+        expense,
+      ]
+    })
+  }
 
   return (
     <div>
-      <h1>App</h1>
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses expenses={expenses} />
     </div>
   );
