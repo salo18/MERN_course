@@ -4,9 +4,8 @@ export default function Form(props) {
   const [formData, setFormData] = useState({
     userName: '',
     age: '',
+    id: Math.random().toString(),
   });
-
-  const [validNumber, setValidNumber] = useState(true);
 
   function updateForm(e) {
     setFormData(old => {
@@ -19,19 +18,21 @@ export default function Form(props) {
 
   function submit(e) {
     e.preventDefault();
-
-// must be integer greater than -1 
-
     props.sendFormData(formData);
+    setFormData({
+      userName: '',
+      age: '',
+      id: Math.random().toString(),
+    })
   }
 
   return (
    <form onSubmit={submit}>
      <p>message</p>
      <label>User Name</label>
-     <input type='text' name='userName' required onChange={updateForm}></input>
+     <input type='text' name='userName' value={formData.userName} required onChange={updateForm}></input>
      <label>Age</label>
-     <input type='number' name='age' required onChange={updateForm}></input>
+     <input type='number' name='age' value={formData.age} required onChange={updateForm}></input>
      <button type='submit'>Add User</button>
    </form>
   )
